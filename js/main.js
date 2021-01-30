@@ -80,8 +80,10 @@ function init() {
 	for(var i = 1; i <= 4; i++) {
 		for(var j = 1; j <= 4; j++) {
 			var gird = $('#gameGird-' + i + '-' + j);
-			gird.css('top', i * 20 + (i - 1) * 100); //每个格子距离顶部和左边的位置的初始化
-			gird.css('left', j * 20 + (j - 1) * 100);
+			// var top = (i * 20 + (i - 1) * 100)*0.625;
+			// var left = (j * 20 + (j - 1) * 100)*0.625;
+			gird.css('top',(i + (i - 1) * 5)*4+'%'); //每个格子距离顶部和左边的位置的初始化
+			gird.css('left', (j + (j - 1) * 5)*4+'%');
 		}
 	}
 	/*初始化数字数组和位置标记数组*/
@@ -132,14 +134,14 @@ function randLocAndNum() {
 
 	//数字出现的颜色和动画
 	var gameNum = $('#gameNum-' + randLocX + '-' + randLocY);
-	var img = "<img src='"+m.get(randNum)+"' style='width:100px;height:100px'/>"
+	var img = "<img src='"+m.get(randNum)+"' style='width:10.85rem;height:10.85rem'/>"
 	gameNum.css({
 		'background-color': getNumBackgroundColor(randNum),
 		'color': getNumColor(randNum)
 	}).html(img);
 	gameNum.animate({
-		width: 100,
-		height: 100
+		width: '10.85rem',
+		height: '10.85rem'
 	}, 200);
 }
 /**
@@ -155,16 +157,20 @@ function updateGird() {
 				gameNum.css({
 					'width': '0px',
 					'height': '0px',
-					'top': i * 20 + (i - 1) * 100,
-					'left': j * 20 + (j - 1) * 100
+					// 'top': (i * 20 + (i - 1) * 100)*0.625 +'rem',
+					// 'left': (j * 20 + (j - 1) * 100)*0.625 +'rem'
+					'top':(i + (i - 1) * 5)*4+'%',
+					'left':(j + (j - 1) * 5)*4+'%',
 				});
 			} else {
-				var img = "<img src='"+m.get(numArray[i][j])+"' style='width:100px;height:100px'/>"
+				var img = "<img src='"+m.get(numArray[i][j])+"' style='width:10.85rem;height:10.85rem'/>"
 				gameNum.css({
-					'width': 100,
-					'height': 100,
-					'top': i * 20 + (i - 1) * 100,
-					'left': j * 20 + (j - 1) * 100,
+					'width': '10.85rem',
+					'height': '10.85rem',
+					// // 'top': (i * 20 + (i - 1) * 100)*0.625 +'rem',
+					// 'left': (j * 20 + (j - 1) * 100)*0.625 +'rem',
+					'top':(i + (i - 1) * 5)*4+'%',
+					'left':(j + (j - 1) * 5)*4+'%',
 					'background-color': getNumBackgroundColor(numArray[i][j]),
 					'color': getNumColor(numArray[i][j])
 				}).html(img);
@@ -218,6 +224,9 @@ $(document).keydown(function(event) { //数字按下的事件
 // 　　// console.log($(window).height()); //627
 // 　　// console.log($('body').height()); //0
 // 　　$body.css("height", windowHeight); //重要代码
+document.ontouchstart = function(){
+    return false;
+};
 $(document).on("touchstart", function(e) {
 　　　　e.preventDefault();
 　　　　startX = e.originalEvent.changedTouches[0].pageX,

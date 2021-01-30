@@ -135,8 +135,8 @@ function upToDownIsNull(i, k, j) {
 function moveAnimation(x1, y1, x2, y2) { //从(x1,y1)点移动到(x2,y2)点的动画
 	var gameNum = $('#gameNum-' + x1 + '-' + y1);
 	gameNum.animate({
-		top: x2 * 20 + (x2 - 1) * 100,
-		left: y2 * 20 + (y2 - 1) * 100
+		top: (x2 + (x2 - 1) * 5)*4+'%',
+		left: (y2 + (y2 - 1) * 5)*4+'%'
 	},200);
 }
 

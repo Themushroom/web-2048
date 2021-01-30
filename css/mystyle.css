@@ -1,6 +1,6 @@
 header h1{
-	font-size: 60px;
-	margin: 45px auto;
+	font-size:3.75rem;
+	margin:2.8125rem auto;
 }
 /*header #newGame{
 	width: 100px;
@@ -9,37 +9,37 @@ header h1{
 	border: none;
 }*/
 #scoreList {
-	font-size: 20px;
-	margin: 20px auto;
+	font-size: 1.25rem;
+	margin: 1.25rem auto;
 	position:relative;
 }
 #gameBody{
-	width: 500px;
-	height: 500px;
-	margin:1px auto;
+	width: 54.25rem;
+	height: 54.25rem;
+	margin:0.0625rem auto;
 	position: relative;
-	border-radius: 10px;
+	border-radius: 0.625rem;
 	/*background-color: #66512C;*/
 	background-image: url(../img/yibo/11.png);
 }
 .gameGird{
-	width: 100px;
-	height: 100px;
+	width: 10.85rem;
+	height: 10.85rem;
 	/* background-color: #985F0D; */
 	/* background-image: url(../img/yibo/0.jpg); */
-	border-radius: 10px;
+	border-radius: 0.625rem;
 	position: absolute;
 }
 .gameNum{
-	font-size: 60px;
+	font-size: 3.125rem;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 0.625rem;
 	position: absolute;
 }
 footer{
 	width: 100%;
-	height: 60px;
+	height: 3.75rem;
 	text-align: center;
-	font-size: 14px;
-	margin-top: 100px;
+	font-size: 0.875rem;
+	margin-top: 0.85rem;
 }
