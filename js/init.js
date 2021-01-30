@@ -153,13 +153,20 @@ function haveSpace() {//判断格子是否还有空格
 
 function gameOver() { //表格上没有空间且不能上下左右都不能再移动
 	if(!haveSpace() && !haveNumMoveToUp() && (!haveNumMoveToDown()) && (!haveNumMoveToLeft()) && (!haveNumMoveToRight()))
-		alert("GameOver!");
+		alert("很遗憾，你没有找到千岁忧/(ㄒoㄒ)/~~");
 }
 function gameSuccess(){
 	for(var i=1;i<=4;i++){
 		for(var j=1;j<=4;j++){
-			if(numArray[i][j]==2048){
-				alert("Challenge Success!\nYou can click NewGame to paly again!");
+			if(numArray[i][j]=="11"){
+				$('.gameGird').css({
+					'display':'none',
+				});
+				$('.gameNum').css({
+					'display':'none'
+				});
+				$('#gameBody').css('background-image','url(./img/yibo/0.jpg)');
+				alert("恭喜你！成功解锁千岁忧！把小老头抱回家吧(●'◡'●)");
 			}
 		}
 	}

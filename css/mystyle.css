@@ -19,12 +19,14 @@ header h1{
 	margin:1px auto;
 	position: relative;
 	border-radius: 10px;
-	background-color: #66512C;
+	/*background-color: #66512C;*/
+	background-image: url(../img/yibo/11.png);
 }
 .gameGird{
 	width: 100px;
 	height: 100px;
-	background-color: #985F0D;
+	/* background-color: #985F0D; */
+	/* background-image: url(../img/yibo/0.jpg); */
 	border-radius: 10px;
 	position: absolute;
 }
@@ -38,6 +40,6 @@ footer{
 	width: 100%;
 	height: 60px;
 	text-align: center;
-	font-size: 18px;
-	margin-top: 20px;
+	font-size: 14px;
+	margin-top: 100px;
 }

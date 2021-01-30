@@ -1,15 +1,15 @@
 var m = new Map([
-	[1, '2'],
-	[2, '4'],
-	[3, '8'],
-	[4, '16'],
-	[5, '32'],
-	[6, '64'],
-	[7, '128'],
-	[8, '256'],
-	[9, '512'],
-	[10, '1024'],
-	[11, '2048']
+	[1, 'img/yibo/1.png'], // 2
+	[2, 'img/yibo/2.png'], // 4
+	[3, 'img/yibo/3.png'], // 8
+	[4, 'img/yibo/4.png'], // 16
+	[5, 'img/yibo/5.png'], // 32
+	[6, 'img/yibo/6.png'], // 64
+	[7, 'img/yibo/7.png'], // 128
+	[8, 'img/yibo/8.png'], // 256
+	[9, 'img/yibo/9.png'], // 512
+	[10, 'img/yibo/10.png'], // 1024
+	[11, 'img/yibo/11.png'], // 2048
 ]);
 var numArray = []; //存放游戏格子数据
 var locArray = []; //标记该格子是否为空
@@ -72,6 +72,10 @@ $(document).ready(function() {
  *初始化游戏格子
  */
 function init() {
+	$('.gameGird').css({
+		'display':'inline'
+	});
+	$('#gameBody').css('background-image','url(img/yibo/11.png)');
 	/*初始化游戏格子的位置*/
 	for(var i = 1; i <= 4; i++) {
 		for(var j = 1; j <= 4; j++) {
@@ -128,10 +132,11 @@ function randLocAndNum() {
 
 	//数字出现的颜色和动画
 	var gameNum = $('#gameNum-' + randLocX + '-' + randLocY);
+	var img = "<img src='"+m.get(randNum)+"' style='width:100px;height:100px'/>"
 	gameNum.css({
 		'background-color': getNumBackgroundColor(randNum),
 		'color': getNumColor(randNum)
-	}).text(m.get(randNum));
+	}).html(img);
 	gameNum.animate({
 		width: 100,
 		height: 100
@@ -154,6 +159,7 @@ function updateGird() {
 					'left': j * 20 + (j - 1) * 100
 				});
 			} else {
+				var img = "<img src='"+m.get(numArray[i][j])+"' style='width:100px;height:100px'/>"
 				gameNum.css({
 					'width': 100,
 					'height': 100,
@@ -161,7 +167,7 @@ function updateGird() {
 					'left': j * 20 + (j - 1) * 100,
 					'background-color': getNumBackgroundColor(numArray[i][j]),
 					'color': getNumColor(numArray[i][j])
-				}).text(m.get(numArray[i][j]));
+				}).html(img);
 			}
 		}
 	}
@@ -176,6 +182,7 @@ $(document).keydown(function(event) { //数字按下的事件
 				setTimeout('updateGird()', 200); //更新格子布局
 				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
 				setTimeout('gameOver()', 300); //判断游戏是否结束
+				setTimeout('gameSuccess()', 300);
 			}
 			break;
 		case 38: //上箭头
@@ -184,6 +191,7 @@ $(document).keydown(function(event) { //数字按下的事件
 				setTimeout('updateGird()', 200);
 				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
 				setTimeout('gameOver()', 300);
+				setTimeout('gameSuccess()', 300);
 			}
 			break;
 		case 39: //右箭头
@@ -191,6 +199,7 @@ $(document).keydown(function(event) { //数字按下的事件
 				setTimeout('updateGird()', 200);
 				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
 				setTimeout('gameOver()', 300);
+				setTimeout('gameSuccess()', 300);
 			}
 			break;
 		case 40: //下箭头
@@ -199,11 +208,62 @@ $(document).keydown(function(event) { //数字按下的事件
 				setTimeout('updateGird()', 200);
 				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
 				setTimeout('gameOver()', 300);
+				setTimeout('gameSuccess()', 300);
 			}
 			break;
 	}
 });
+// var windowHeight = $(window).height(),
+// 　　$body = $("body");
+// 　　// console.log($(window).height()); //627
+// 　　// console.log($('body').height()); //0
+// 　　$body.css("height", windowHeight); //重要代码
+$(document).on("touchstart", function(e) {
+　　　　e.preventDefault();
+　　　　startX = e.originalEvent.changedTouches[0].pageX,
+　　　　startY = e.originalEvent.changedTouches[0].pageY;
+　　});
+　　$(document).on("touchmove", function(e) {
+　　　　e.preventDefault();
+　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+　　　　X = moveEndX - startX,
+　　　　Y = moveEndY - startY;
 
+　　　　if ( Math.abs(X) > Math.abs(Y) && X > 0 ) { // 右滑
+　　　　　　if(moveToRight()) {
+				setTimeout('updateGird()', 200);
+				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
+				setTimeout('gameOver()', 300);
+			}
+　　　　}
+　　　　else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) { // 左滑
+　　　　　　if(moveToLeft()) { //移动成功
+				setTimeout('updateGird()', 200); //更新格子布局
+				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
+				setTimeout('gameOver()', 300); //判断游戏是否结束
+			}
+　　　　}
+　　　　else if ( Math.abs(Y) > Math.abs(X) && Y > 0) { // 下滑
+　　　　　　event.preventDefault();
+			if(moveToDown()) {
+				setTimeout('updateGird()', 200);
+				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
+				setTimeout('gameOver()', 300);
+			}
+　　　　}
+　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) { // 上滑
+　　　　　　event.preventDefault(); //去除按键的默认事件
+			if(moveToUp()) {
+				setTimeout('updateGird()', 200);
+				setTimeout('randLocAndNum()', 300); //出现新的数字在空格子上
+				setTimeout('gameOver()', 300);
+			}
+　　　　}
+　　　　else{
+// 　　　　　　alert("just touch");
+　　　　}
+　　});
 function moveToLeft() {
 	if(!haveNumMoveToLeft()) //haveNumMoveToLeft() is in init.js 判断是否有数字可以左移
 		return false;
